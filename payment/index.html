@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ការទូទាត់ប្រាក់ប្រកបដោយសុវត្ថិភាព | GOJO PAY</title>
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+        script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+        img-src 'self' data: https:;
+        connect-src 'none';
+        frame-src 'none';
+        form-action 'none';
+        base-uri 'none';
+    ">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer">
+    
+    <!-- Google Khmer Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" 
+          rel="stylesheet">
+
+    <style>
+        /* ===== RESET & DARK PURPLE THEME ===== */
+        :root {
+            --primary-purple: #7928ca;
+            --accent-purple: #b87cf8;
+            --dark-bg: #090312;
+            --deep-purple: #140727;
+            --glass-bg: rgba(26, 11, 46, 0.65);
+            --glass-border: rgba(184, 124, 248, 0.18);
+            --text-main: #ffffff;
+            --text-light: #c8bad8;
+            --acleda-glow: #c39a3f;
+            --aba-glow: #00b4d8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kantumruy Pro', 'Segoe UI', Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: radial-gradient(ellipse at top, #260b48 0%, #100421 55%, var(--dark-bg) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* ===== STARS BACKGROUND ===== */
+        #stars, #stars2, #stars3 {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            background: transparent;
+            pointer-events: none;
+        }
+
+        @keyframes animStar {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-2000px); }
+        }
+
+        .star-layer-1 { animation: animStar 50s linear infinite; }
+        .star-layer-2 { animation: animStar 100s linear infinite; }
+        .star-layer-3 { animation: animStar 150s linear infinite; }
+
+        /* ===== MAIN CONTAINER ===== */
+        .checkout-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 45px 35px;
+            border-radius: 28px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.75), 
+                        inset 0 0 30px rgba(139, 44, 255, 0.15);
+            max-width: 820px;
+            width: 100%;
+            text-align: center;
+            animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ===== HEADER LOGO SECTION ===== */
+        .header-logo-wrapper {
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 95px;
+            height: 95px;
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--primary-purple) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 25px rgba(184, 124, 248, 0.4);
+            animation: floatLogo 3.5s ease-in-out infinite, pulseGlow 2.5s infinite alternate;
+            overflow: hidden;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @keyframes floatLogo {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(184, 124, 248, 0.4); }
+            100% { box-shadow: 0 0 40px rgba(184, 124, 248, 0.8), 0 0 10px rgba(255, 255, 255, 0.4); }
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #f3e7ff, #b87cf8, #8ec5fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            margin-bottom: 35px;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .subtitle i {
+            color: var(--accent-purple);
+            margin-right: 6px;
+        }
+
+        /* ===== PAYMENT CARDS ===== */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background: rgba(15, 5, 28, 0.55);
+            border: 1px solid var(--glass-border);
+            border-radius: 22px;
+            padding: 35px 25px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(184, 124, 248, 0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .card:hover, .card:active {
+            transform: translateY(-5px);
+            background: rgba(184, 124, 248, 0.08);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.15) translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .btn {
+            padding: 14px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 90%;
+            margin-top: auto;
+            pointer-events: none; /* Let clicks pass through to the card handler */
+        }
+
+        /* ACLEDA */
+        .card.acleda:hover, .card.acleda:active {
+            border-color: var(--acleda-glow);
+            box-shadow: 0 10px 30px rgba(195, 154, 63, 0.25);
+        }
+        .card.acleda .card-icon { color: var(--acleda-glow); }
+        .card.acleda .btn {
+            background: rgba(195, 154, 63, 0.2);
+            border: 1px solid var(--acleda-glow);
+            color: var(--acleda-glow);
+        }
+        .card.acleda:hover .btn, .card.acleda:active .btn {
+            background: var(--acleda-glow);
+            color: #000;
+            box-shadow: 0 0 18px var(--acleda-glow);
+        }
+
+        /* ABA */
+        .card.aba:hover, .card.aba:active {
+            border-color: var(--aba-glow);
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.25);
+        }
+        .card.aba .card-icon { color: var(--aba-glow); }
+        .card.aba .btn {
+            background: rgba(0, 180, 216, 0.2);
+            border: 1px solid var(--aba-glow);
+            color: var(--aba-glow);
+        }
+        .card.aba:hover .btn, .card.aba:active .btn {
+            background: var(--aba-glow);
+            color: #000;
+            box-shadow: 0 0 18px var(--aba-glow);
+        }
+
+        /* ===== LOADING OVERLAY ===== */
+        .loader-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(9, 3, 18, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loader-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid var(--primary-purple);
+            border-right: 4px solid var(--accent-purple);
+            border-radius: 50%;
+            animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            margin-bottom: 25px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .checkout-container { padding: 35px 20px; }
+            .payment-methods { grid-template-columns: 1fr; }
+            h1 { font-size: 24px; }
+            .brand-logo { width: 80px; height: 80px; font-size: 34px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="stars" class="star-layer-1"></div>
+    <div id="stars2" class="star-layer-2"></div>
+    <div id="stars3" class="star-layer-3"></div>
+
+    <div class="checkout-container">
+        
+        <!-- ===== HEADER LOGO SECTION ===== -->
+        <div class="header-logo-wrapper">
+            <div class="brand-logo">
+                 <img src="./magneticcc.png" alt="Brand Logo" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fas fa-bag-shopping\'></i>';"> 
+            </div>
+            <div class="brand-name">MAGNETIC PAY</div>
+        </div>
+
+        <h1>ជ្រើសរើសវិធីទូទាត់ប្រាក់</h1>
+        <p class="subtitle"><i class="fas fa-shield-halved"></i> ការទូទាត់ប្រកបដោយសុវត្ថិភាពខ្ពស់</p>
+        
+        <div class="payment-methods">
+            
+            <div class="card acleda" data-method="acleda" role="button" tabindex="0">
+                <div class="card-icon">
+                    <i class="fas fa-building-columns"></i>
+                </div>
+                <h2>ធនាគារ អេស៊ីលីដា</h2>
+                <p>ទូទាត់ប្រាក់យ៉ាងមានសុវត្ថិភាពតាមកម្មវិធី ACLEDA Mobile</p>
+                <button class="btn" type="button">ទូទាត់តាម ACLEDA</button>
+            </div>
+
+            <div class="card aba" data-method="aba" role="button" tabindex="0">
+                <div class="card-icon">
+                    <i class="fas fa-mobile-screen-button"></i>
+                </div>
+                <h2>ABA PAYWAY</h2>
+                <p>ទូទាត់ប្រាក់បានរហ័ស និងងាយស្រួលតាមកម្មវិធី ABA Mobile</p>
+                <button class="btn" type="button">ទូទាត់តាម ABA</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="loader-overlay" id="loader">
+        <div class="spinner"></div>
+        <h2 style="font-size: 22px;">កំពុងបើកកម្មវិធីទូទាត់ប្រាក់...</h2>
+        <p style="color: var(--text-light); margin-top: 8px;">សូមរង់ចាំមួយភ្លែត ប្រព័ន្ធកំពុងបញ្ជូនលោកអ្នកទៅកាន់កម្មវិធីធនាគារ</p>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ================================================================
+            // CONFIGURATION — RUNTIME ENCRYPTION
+            // ================================================================
+            var CONFIG = (function() {
+                var raw = {
+                    acleda: "https://acledabank.com.kh/acleda?payment_data=qWY5B2SAUfIhLblxzOtfu5ckLzMHjaSki6Ru0bsOyNK+ylPBgZ0sHH6BeGUscKoEilGTyaRdSygpGQiqNanEjRf0srQhJwUdTTQZOL8PJcEoVMybWHEXKsSohuinwUt/yvt6OabqA7vnpxv0lEZHg/mo93sDszju9xqqnQJsae2RqDpzzM6kobJ8jBAgC92aDrIJr5TsLEbZYsSuYwlytsG9zGX4aclQ/zY3qXIxTvg=&key=khqr",
+                    aba: "https://pay.ababank.com/oRF8/x5vridoy"
+                };
+
+                var key = [
+                    0x3A, 0x7F, 0xC2, 0x9B, 0x4E, 0x11, 0xD5, 0x68,
+                    0x8F, 0x24, 0xE3, 0x5C, 0x79, 0xA0, 0x1D, 0xF6
+                ];
+
+                function xorBytes(str) {
+                    var bytes = [];
+                    for (var i = 0; i < str.length; i++) {
+                        bytes.push(str.charCodeAt(i) ^ key[i % key.length]);
+                    }
+                    return bytes;
+                }
+
+                function toBase64(byteArray) {
+                    var binary = '';
+                    for (var i = 0; i < byteArray.length; i++) {
+                        binary += String.fromCharCode(byteArray[i]);
+                    }
+                    return btoa(binary);
+                }
+
+                function encrypt(plain) {
+                    return toBase64(xorBytes(plain));
+                }
+
+                var enc = {};
+                for (var m in raw) {
+                    if (raw.hasOwnProperty(m)) {
+                        enc[m] = encrypt(raw[m]);
+                    }
+                }
+                raw = null;
+
+                function fromBase64(str) {
+                    var binary = atob(str);
+                    var bytes = [];
+                    for (var i = 0; i < binary.length; i++) {
+                        bytes.push(binary.charCodeAt(i));
+                    }
+                    return bytes;
+                }
+
+                function xorDecrypt(byteArray) {
+                    var chars = [];
+                    for (var i = 0; i < byteArray.length; i++) {
+                        chars.push(String.fromCharCode(byteArray[i] ^ key[i % key.length]));
+                    }
+                    return chars.join('');
+                }
+
+                function getDecrypted(method) {
+                    if (!enc[method]) return null;
+                    return xorDecrypt(fromBase64(enc[method]));
+                }
+
+                return {
+                    getUrl: getDecrypted
+                };
+            })();
+
+            // ================================================================
+            // STAR BACKGROUND
+            // ================================================================
+            function createStars(elementId, count, size) {
+                var el = document.getElementById(elementId);
+                if (!el) return;
+                var shadows = '';
+                for (var i = 0; i < count; i++) {
+                    var x = Math.floor(Math.random() * window.innerWidth);
+                    var y = Math.floor(Math.random() * 2000);
+                    shadows += x + 'px ' + y + 'px #FFF' + (i < count - 1 ? ', ' : '');
+                }
+                el.style.width = size + 'px';
+                el.style.height = size + 'px';
+                el.style.background = 'transparent';
+                el.style.boxShadow = shadows;
+
+                var style = document.createElement('style');
+                style.textContent = '#' + elementId + '::after { content: " "; position: absolute; top: 2000px; width: ' + size + 'px; height: ' + size + 'px; background: transparent; box-shadow: ' + shadows + '; }';
+                document.head.appendChild(style);
+            }
+
+            // ================================================================
+            // SOUND EFFECTS
+            // ================================================================
+            function playClickSound() {
+                try {
+                    var AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioCtx) return;
+                    var ctx = new AudioCtx();
+                    var osc = ctx.createOscillator();
+                    var gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(850, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(320, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.5, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                    osc.start(ctx.currentTime);
+                    osc.stop(ctx.currentTime + 0.1);
+                } catch(e) {}
+            }
+
+            // ================================================================
+            // UNIVERSAL DEEP LINK LAUNCHER (1 SECOND LOADER)
+            // ================================================================
+            function launchBankApp(url) {
+                var loader = document.getElementById('loader');
+                if (loader) loader.classList.add('active');
+
+                var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+                // For iOS use window.location.assign immediately to trigger Universal Link
+                if (isIOS) {
+                    window.location.assign(url);
+                } else {
+                    // For Android and other webviews
+                    var link = document.createElement('a');
+                    link.setAttribute('href', url);
+                    link.setAttribute('target', '_self');
+                    link.setAttribute('rel', 'noopener noreferrer');
+                    document.body.appendChild(link);
+                    link.click();
+                    setTimeout(function() {
+                        if (link.parentNode) link.parentNode.removeChild(link);
+                    }, 100);
+                }
+
+                // CHANGED: Automatically hide loader after exactly 1 second (1000ms)
+                setTimeout(function() {
+                    if (loader) loader.classList.remove('active');
+                }, 1000);
+            }
+
+            // Auto-hide spinner if user switches to the banking app and returns to the browser later
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    var loader = document.getElementById('loader');
+                    if (loader) loader.classList.remove('active');
+                }
+            });
+
+            // ================================================================
+            // ATTACH EVENT LISTENERS
+            // ================================================================
+            document.addEventListener('DOMContentLoaded', function() {
+                var cards = document.querySelectorAll('.card');
+                for (var i = 0; i < cards.length; i++) {
+                    (function(card) {
+                        var method = card.getAttribute('data-method');
+                        var url = CONFIG.getUrl(method);
+
+                        card.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            playClickSound();
+                            if (url) {
+                                launchBankApp(url);
+                            }
+                        });
+
+                        card.addEventListener('keydown', function(e) {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                playClickSound();
+                                if (url) {
+                                    launchBankApp(url);
+                                }
+                            }
+                        });
+                    })(cards[i]);
+                }
+
+                createStars('stars', 100, 1);
+                createStars('stars2', 50, 2);
+                createStars('stars3', 20, 3);
+            });
+
+        })();
+    </script>
+</body>
+</html>
