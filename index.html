@@ -4,307 +4,432 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ម៉ាញ៉េទិច - MAGNETIC 🧲</title>
+  <title>ម៉ាញ៉េទិច - MAGNETIC 🧲 | Official Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dangrek&family=Koulen&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Kantumruy+Pro:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    :root {
+      --bg-color: #030712;
+    }
+
     body {
-      font-family: 'Koulen', sans-serif;
+      font-family: 'Outfit', 'Kantumruy Pro', 'Battambang', sans-serif;
+      margin: 0;
+      padding: 0;
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 1rem;
+      align-items: flex-start;
+      color: #f8fafc;
+      background-color: var(--bg-color);
       overflow-x: hidden;
-
-      /* Background image full screen */
-      background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80") 
-                  no-repeat center center fixed;
-      background-size: cover;
+      position: relative;
     }
 
-    .dangrek-regular {
-      font-family: "Dangrek", sans-serif;
-      font-weight: 400;
-      font-style: normal;
+    /* ផ្ទៃខាងក្រោយបែប Aurora Glow & Mesh Gradient */
+    .mesh-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.2) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 90%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
+                  radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.1) 0%, transparent 60%),
+                  #030712;
     }
 
-    .card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+    /* រូប Logo ធម្មតាគ្មានស៊ុមរង្វង់ និងមានស្រមោលអណ្តែតស្អាត */
+    .clean-logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 24px;
+      object-fit: cover;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.2);
+      transition: transform 0.3s ease;
     }
 
-    .card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15),
-        0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    .clean-logo:hover {
+      transform: scale(1.05);
     }
 
-    /* Special Offer Logo styles */
-    .special-offer-container {
-      text-align: center;
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
+    /* ប៊ូតុងលេខទូរស័ព្ទរាង Capsule ស្អាតខ្លាំង */
+    .phone-capsule {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      transition: all 0.3s ease;
     }
 
-    .special-offer-logo-link {
-      display: inline-block;
-      max-width: 160px;
-      padding: 8px;
-      border-radius: 1rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
-      background-color: rgba(255, 255, 255, 0); 
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .phone-capsule:hover {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
     }
 
-    .special-offer-logo-link:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 15px -3px rgba(231, 76, 60, 0.5), 0 4px 6px -2px rgba(231, 76, 60, 0.2);
+    /* កាតប៊ូតុងស្ទីលថ្មី (Glass Frosted Card) */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      text-decoration: none;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+      position: relative;
+      overflow: hidden;
     }
 
-    .special-offer-logo-link img {
-      width: 100%; 
-      height: auto;
-      display: block;
-    }
-    
-    .offer-text {
-      font-size: 1.1em;
-      font-weight: bold;
-      color: #e74c3c;
-      margin-top: 6px;
-      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .info-button {
-      transition: transform 0.3s ease, background-color 0.3s ease;
-      cursor: pointer;
+    .glass-card:hover::before {
+      opacity: 1;
     }
 
-    .info-button:hover {
+    .glass-card:hover {
+      transform: translateY(-4px) scale(1.015);
+      border-color: rgba(236, 72, 153, 0.4);
+      box-shadow: 0 20px 40px -15px rgba(236, 72, 153, 0.3);
+      background: rgba(30, 41, 59, 0.8);
+    }
+
+    /* កាតពិសេសសម្រាប់តម្លៃពិសេស (Special Offer) */
+    .card-hot {
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(99, 102, 241, 0.1));
+      border: 1.5px solid rgba(236, 72, 153, 0.5);
+    }
+    .card-hot:hover {
+      border-color: #ec4899;
+      box-shadow: 0 20px 45px -12px rgba(236, 72, 153, 0.45);
+    }
+
+    /* កាតពិសេសសម្រាប់បោះដុំ (VIP Wholesale) */
+    .card-vip {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.05));
+      border: 1.5px solid rgba(245, 158, 11, 0.5);
+    }
+    .card-vip:hover {
+      border-color: #f59e0b;
+      box-shadow: 0 20px 45px -12px rgba(245, 158, 11, 0.45);
+    }
+
+    /* លំដាប់ Animation ពេល Load ចេញមក */
+    .glass-card:nth-child(1) { animation-delay: 0.05s; }
+    .glass-card:nth-child(2) { animation-delay: 0.10s; }
+    .glass-card:nth-child(3) { animation-delay: 0.15s; }
+    .glass-card:nth-child(4) { animation-delay: 0.20s; }
+    .glass-card:nth-child(5) { animation-delay: 0.25s; }
+    .glass-card:nth-child(6) { animation-delay: 0.30s; }
+    .glass-card:nth-child(7) { animation-delay: 0.35s; }
+    .glass-card:nth-child(8) { animation-delay: 0.40s; }
+    .glass-card:nth-child(9) { animation-delay: 0.45s; }
+    .glass-card:nth-child(10) { animation-delay: 0.50s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* និមិត្តសញ្ញា (Icon Box) រាងប្រណីត */
+    .icon-wrapper {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+
+    .glass-card:hover .icon-wrapper {
       transform: scale(1.1) rotate(5deg);
-      background-color: #f1f5f9;
     }
 
-    /* Animations for Header Buttons */
-    @keyframes pulse-glow {
-      0% { box-shadow: 0 0 10px rgba(0, 198, 255, 0.4); transform: scale(1); }
-      50% { box-shadow: 0 0 20px rgba(0, 198, 255, 0.8); transform: scale(1.02); }
-      100% { box-shadow: 0 0 10px rgba(0, 198, 255, 0.4); transform: scale(1); }
-    }
-
-    @keyframes pulse-glow-fb {
-      0% { box-shadow: 0 0 10px rgba(24, 119, 242, 0.4); transform: scale(1); }
-      50% { box-shadow: 0 0 20px rgba(24, 119, 242, 0.8); transform: scale(1.02); }
-      100% { box-shadow: 0 0 10px rgba(24, 119, 242, 0.4); transform: scale(1); }
-    }
-
-    .animated-telegram-btn {
-      background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-      color: white;
-      animation: pulse-glow 2s infinite ease-in-out;
-      transition: all 0.3s ease;
-    }
-
-    .animated-telegram-btn:hover {
-      animation: none;
-      transform: scale(1.03);
-      box-shadow: 0 10px 25px rgba(0, 114, 255, 0.6);
-    }
-
-    .animated-facebook-btn {
-      background: linear-gradient(135deg, #1877f2 0%, #0056b3 100%);
-      color: white;
-      animation: pulse-glow-fb 2.5s infinite ease-in-out;
-      transition: all 0.3s ease;
-    }
-    .kantumruy-pro {
-  font-family: "Kantumruy Pro", sans-serif;
-}
-
-    .animated-facebook-btn:hover {
-      animation: none;
-      transform: scale(1.03);
-      box-shadow: 0 10px 25px rgba(24, 119, 242, 0.6);
+    .khmer-font {
+      font-family: 'Kantumruy Pro', 'Battambang', sans-serif;
     }
   </style>
 </head>
 
 <body>
-  <div class="w-full max-w-sm md:max-w-xl mx-auto p-4">
-    <!-- Header Container -->
-    <div class="relative w-full overflow-hidden mb-6 p-6 rounded-3xl shadow-lg"
-      style="background: linear-gradient(135deg, #375D9A, #2C4880); transition: all 0.4s ease;">
-      <div class="flex flex-col items-center justify-center space-y-4">
 
+  <div class="mesh-bg"></div>
 
-        
-        
-        
-        <div class="w-full flex flex-col space-y-3">
+  <main class="w-full max-w-md px-5 py-9 relative z-10">
 
-          <a href="https://t.me/MagneticwholeSale" target="_blank" rel="noopener noreferrer"
-   class="animated-telegram-btn flex items-center justify-center space-x-2 px-6 py-3 rounded-full border border-blue-300/30">
-  <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-    <path
-      d="M9.999 15.17l-.39 5.58c.56 0 .8-.24 1.1-.53l2.64-2.52 5.47 4c1 .56 1.72.27 1.98-.92l3.59-16.85.01-.01c.32-1.49-.54-2.07-1.52-1.72L1.45 9.53c-1.46.58-1.44 1.41-.25 1.79l5.88 1.83L18.69 6.2c.59-.36 1.13-.16.69.23">
-    </path>
-  </svg>
-  <span class="kantumruy-pro text-lg font-semibold tracking-wide">រំលស់បាន❤️ យកភ្លាមៗ</span>
-</a>
+    <!-- Header / Profile Section -->
+    <header class="text-center mb-8 opacity-0 animate-[fadeInUp_0.6s_ease_forwards]">
+      <!-- Logo គ្មានស៊ុមរង្វង់ -->
+      <div class="mb-3 inline-flex">
+        <img src="magneticcc.png" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=MG&background=6366f1&color=ffffff&size=256&bold=true'" alt="ម៉ាញ៉េទិច - MAGNETIC" class="clean-logo">
+      </div>
 
-          <!-- Animated Telegram Group Button 1 -->
-          <a href="https://t.me/magneticappleoffical" target="_blank" rel="noopener noreferrer"
-             class="animated-telegram-btn flex items-center justify-center space-x-2 px-6 py-3 rounded-full border border-blue-300/30">
-            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M9.999 15.17l-.39 5.58c.56 0 .8-.24 1.1-.53l2.64-2.52 5.47 4c1 .56 1.72.27 1.98-.92l3.59-16.85.01-.01c.32-1.49-.54-2.07-1.52-1.72L1.45 9.53c-1.46.58-1.44 1.41-.25 1.79l5.88 1.83L18.69 6.2c.59-.36 1.13-.16.69.23">
-              </path>
-            </svg>
-            <span class="kantumruy-pro text-lg font-semibold tracking-wide">👍 គ្រុបលក់ទូរសព្ទ័បោះដុំ</span>
+      <!-- Official Store Hub ដាក់នៅខាងក្រោម Logo -->
+      <div>
+        <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>
+          Official Store Hub
+        </span>
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight flex items-center justify-center gap-2 mt-3">
+        <span class="khmer-font text-indigo-400">ម៉ាញ៉េទិច</span>
+        <span class="text-white">MAGNETIC 🧲</span>
+        <svg class="w-5 h-5 text-sky-400 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7L6 12.6l1.5-1.5 2.6 2.6 6.4-6.4 1.5 1.5-7.9 7.9z"/>
+        </svg>
+      </h1>
+
+      <p class="khmer-font text-slate-400 text-xs sm:text-sm mt-1.5 font-medium">
+        បោះដុំ និងលក់រាយទូរស័ព្ទដៃគ្រប់ប្រភេទ • សេវាកម្មបង់រំលស់ឆាប់រហ័ស
+      </p>
+
+      <!-- លេខទូរស័ព្ទហាង -->
+      <div class="mt-5 bg-slate-900/70 backdrop-blur-2xl border border-slate-800/80 rounded-3xl p-4 shadow-2xl">
+        <div class="flex items-center justify-center gap-1.5 text-xs font-bold text-slate-400 mb-3 khmer-font">
+          <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          </svg>
+          <span>លេខទំនាក់ទំនងហាង (ចុចដើម្បីតេ)</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <a href="tel:099969393" class="phone-capsule rounded-2xl py-2 px-1 text-center">
+            <span class="block text-[10px] font-bold text-amber-400">Cellcard</span>
+            <span class="text-xs font-bold text-white">099 969 393</span>
           </a>
-
-          <!-- Animated Telegram Group Button 2 -->
-
-          <a href="https://t.me/magneticsmartphone" target="_blank" rel="noopener noreferrer"
-             class="animated-telegram-btn flex items-center justify-center space-x-2 px-6 py-3 rounded-full border border-blue-300/30">
-            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M9.999 15.17l-.39 5.58c.56 0 .8-.24 1.1-.53l2.64-2.52 5.47 4c1 .56 1.72.27 1.98-.92l3.59-16.85.01-.01c.32-1.49-.54-2.07-1.52-1.72L1.45 9.53c-1.46.58-1.44 1.41-.25 1.79l5.88 1.83L18.69 6.2c.59-.36 1.13-.16.69.23">
-              </path>
-            </svg>
-            <span class="kantumruy-pro text-lg font-semibold tracking-wide">បោះដុំ និងលក់រាយ</span>
+          <a href="tel:098969393" class="phone-capsule rounded-2xl py-2 px-1 text-center">
+            <span class="block text-[10px] font-bold text-emerald-400">Smart</span>
+            <span class="text-xs font-bold text-white">098 969 393</span>
+          </a>
+          <a href="tel:067888881" class="phone-capsule rounded-2xl py-2 px-1 text-center">
+            <span class="block text-[10px] font-bold text-rose-400">Metfone</span>
+            <span class="text-xs font-bold text-white">067 88888 1</span>
           </a>
         </div>
-
+        <div class="mt-2">
+          <a href="tel:085888881" class="phone-capsule rounded-2xl py-1.5 px-3 flex items-center justify-center gap-2">
+            <span class="text-[11px] font-bold text-amber-400">Cellcard VIP:</span>
+            <span class="text-xs font-bold text-white">085 88888 1</span>
+          </a>
+        </div>
       </div>
-    </div>
+    </header>
 
-    <!-- Link Cards Section -->
-    <a href="https://web.facebook.com/mageneticsmartphone" target="_blank" rel="noopener noreferrer"
-      class="card block bg-white p-4 mb-4 rounded-3xl shadow-md">
-      <div class="flex items-center space-x-4">
-        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-xl bg-[#1877F2]">
-          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M14 11.5h2.5l.5-2.5H14V7c0-.6.4-1 1-1h1.5V3.5h-2c-2.8 0-4 1.2-4 3.7V9h-2v2.5h2V20h3z">
-            </path>
+    <!-- Links / Buttons Section -->
+    <section class="flex flex-col gap-3.5">
+
+      <!-- 1. Special Offer Website -->
+      <a href="https://magneticsmartphone.store" target="_blank" rel="noopener noreferrer" class="glass-card card-hot">
+        <div class="icon-wrapper bg-gradient-to-br from-pink-500 to-rose-600 text-white shadow-md p-1">
+          <img src="magneticcc.png" onerror="this.onerror=null; this.src='https://placehold.co/48x48/ec4899/ffffff?text=%25';" alt="Special Price" class="w-full h-full object-contain rounded-xl">
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <h2 class="khmer-font font-bold text-base text-pink-300 truncate">ចុចទីនេះដើម្បីដឹងតម្លៃពិសេស!</h2>
+            <span class="px-2 py-0.5 text-[9px] font-extrabold rounded-full bg-pink-500 text-white uppercase tracking-wider">HOT</span>
+          </div>
+          <p class="text-xs font-medium text-slate-300 mt-0.5 truncate">magneticsmartphone.store</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-300">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- 2. Installment -->
+      <a href="https://t.me/MagneticwholeSale" target="_blank" rel="noopener noreferrer" class="glass-card">
+        <div class="icon-wrapper bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <div class="flex-grow">
-          <h2 class="text-lg font-semibold text-gray-800">ម៉ាញ៉េទិច - MAGNETIC 🧲</h2>
-          <p class="text-sm text-gray-500 dangrek-regular">បណ្តាញព័ត៌មានពីឈ្មោះ: Facebook</p>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <h2 class="khmer-font font-bold text-base text-white truncate">រំលស់បាន❤️ យកភ្លាមៗ</h2>
+            <span class="px-2 py-0.5 text-[9px] font-bold rounded-full bg-blue-500/20 text-blue-300 khmer-font">បង់រំលស់</span>
+          </div>
+          <p class="khmer-font text-xs text-slate-400 mt-0.5">ឯកសារងាយៗ អនុម័តរហ័សទាន់ចិត្ត</p>
         </div>
-      </div>
-    </a>
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
 
-    <a href="https://www.tiktok.com/@magnetic_apple_gojo" target="_blank" rel="noopener noreferrer"
-      class="card block bg-white p-4 mb-4 rounded-3xl shadow-md">
-      <div class="flex items-center space-x-4">
-        <div class="w-12 h-12 flex-shrink-0 rounded-xl overflow-hidden">
-          <img src="./onlineshop.png" 
-               alt="TikTok Profile" 
-               class="w-full h-full object-cover"
-               onerror="this.onerror=null; this.src='https://placehold.co/48x48/000000/ffffff?text=TT';">
-        </div>
-        <div class="flex-grow">
-          <h2 class="text-lg font-semibold text-gray-800">TikTok</h2>
-          <p class="text-sm text-gray-500 dangrek-regular">គណនីផ្លូវការ TikTok ឈ្មោះ : Magnetic GOJO</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="https://www.tiktok.com/@magneticgojo" target="_blank" rel="noopener noreferrer"
-      class="card block bg-white p-4 mb-4 rounded-3xl shadow-md">
-      <div class="flex items-center space-x-4">
-        <div class="w-12 h-12 flex-shrink-0 rounded-xl overflow-hidden">
-          <img src="./phoneshop.png" 
-               alt="TikTok Profile" 
-               class="w-full h-full object-cover"
-               onerror="this.onerror=null; this.src='https://placehold.co/48x48/000000/ffffff?text=TT';">
-        </div>
-        <div class="flex-grow">
-          <h2 class="text-lg font-semibold text-gray-800">TikTok</h2>
-          <p class="text-sm text-gray-500 dangrek-regular">គណនីផ្លូវការ TikTok ឈ្មោះ : magneticgojo</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="https://t.me/magnetic_apple_01" target="_blank" rel="noopener noreferrer"
-      class="card block bg-white p-4 mb-4 rounded-3xl shadow-md">
-      <div class="flex items-center space-x-4">
-        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-xl bg-[#0088cc]">
-          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M9.999 15.17l-.39 5.58c.56 0 .8-.24 1.1-.53l2.64-2.52 5.47 4c1 .56 1.72.27 1.98-.92l3.59-16.85.01-.01c.32-1.49-.54-2.07-1.52-1.72L1.45 9.53c-1.46.58-1.44 1.41-.25 1.79l5.88 1.83L18.69 6.2c.59-.36 1.13-.16.69.23">
-            </path>
+      <!-- 3. Telegram Group 1 -->
+      <a href="https://t.me/magneticappleoffical" target="_blank" rel="noopener noreferrer" class="glass-card card-vip">
+        <div class="icon-wrapper bg-gradient-to-br from-amber-400 to-orange-600 text-slate-950 shadow-md">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
           </svg>
         </div>
-        <div class="flex-grow">
-          <h2 class="text-lg font-semibold text-gray-800">Telegram</h2>
-          <p class="text-sm text-gray-500 dangrek-regular">ទាក់ទង Telegram</p>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <h2 class="khmer-font font-bold text-base text-amber-300 truncate">👍 គ្រុបលក់ទូរសព្ទ័បោះដុំ</h2>
+            <span class="px-2 py-0.5 text-[9px] font-bold rounded-full bg-amber-400/20 text-amber-300 khmer-font">បោះដុំ</span>
+          </div>
+          <p class="khmer-font text-xs text-slate-300 mt-0.5">Telegram Group តម្លៃពិសេសសម្រាប់ម៉ូយ</p>
         </div>
-      </div>
-    </a>
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-amber-300">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
 
-    <a href="https://maps.app.goo.gl/6S4p5MoYTnf8b7kU7" target="_blank" rel="noopener noreferrer"
-      class="card block bg-white p-4 mb-4 rounded-3xl shadow-md">
-      <div class="flex items-center space-x-4">
-        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-xl bg-green-500">
-          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zM12 11.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5 14.5 7.6 14.5 9 13.4 11.5 12 11.5z">
-            </path>
+      <!-- 4. Telegram Group 2 -->
+      <a href="https://t.me/magneticsmartphone" target="_blank" rel="noopener noreferrer" class="glass-card">
+        <div class="icon-wrapper bg-gradient-to-br from-cyan-400 to-blue-600 text-white shadow-md">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
           </svg>
         </div>
-        <div class="flex-grow">
-          <h2 class="text-lg font-semibold text-gray-800">ទីតាំងហាង</h2>
-          <p class="text-sm text-gray-500 dangrek-regular">ម៉ាញ៉េទិច ផ្ទះ 731 ផ្លូវកម្ពុជាក្រោម ស្តុបទឹកល្អក់១  099 | 098 969393 | 067 88888 1 | 085 88888 1</p>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <h2 class="khmer-font font-bold text-base text-white truncate">បោះដុំ និងលក់រាយ</h2>
+            <span class="px-2 py-0.5 text-[9px] font-bold rounded-full bg-cyan-500/20 text-cyan-300 khmer-font">Telegram</span>
+          </div>
+          <p class="khmer-font text-xs text-slate-400 mt-0.5">តាមដានស្តុកថ្មីៗ និងតម្លៃប្រចាំថ្ងៃ</p>
         </div>
-      </div>
-    </a>
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
 
-    <a href="https://m.me/mageneticsmartphone" target="_blank" rel="noopener noreferrer"
-      class="card block bg-white p-4 mb-4 rounded-3xl shadow-md">
-      <div class="flex items-center space-x-4">
-        <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-xl bg-blue-600">
-          <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+      <!-- 5. Telegram Direct Contact -->
+      <a href="https://t.me/magnetic_apple_01" target="_blank" rel="noopener noreferrer" class="glass-card">
+        <div class="icon-wrapper bg-gradient-to-br from-sky-500 to-indigo-600 text-white shadow-md">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h2 class="font-bold text-base text-white">Telegram</h2>
+          <p class="khmer-font text-xs text-slate-400 mt-0.5">ទាក់ទង Telegram ផ្ទាល់</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- 6. Facebook Page -->
+      <a href="https://web.facebook.com/mageneticsmartphone" target="_blank" rel="noopener noreferrer" class="glass-card">
+        <div class="icon-wrapper bg-gradient-to-br from-blue-600 to-indigo-800 text-white shadow-md">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h2 class="khmer-font font-bold text-base text-white truncate">ម៉ាញ៉េទិច - MAGNETIC 🧲</h2>
+          <p class="khmer-font text-xs text-slate-400 mt-0.5">បណ្តាញព័ត៌មានផ្លូវការ: Facebook</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- 7. Messenger -->
+      <a href="https://m.me/mageneticsmartphone" target="_blank" rel="noopener noreferrer" class="glass-card">
+        <div class="icon-wrapper bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white shadow-md">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.02 2 11c0 2.7 1.31 5.13 3.44 6.8V22l3.33-1.83c.98.27 2.03.41 3.23.41 5.52 0 10-4.02 10-9s-4.48-9-10-9zm1.03 11.98-2.55-2.72-4.98 2.72 5.47-5.81 2.6 2.72 4.93-2.72-5.47 5.81z"/>
           </svg>
         </div>
-        <div class="flex-grow">
-          <h2 class="text-lg font-semibold text-gray-800">Messenger</h2>
-          <p class="text-sm text-gray-500 dangrek-regular">
-            Chat មកកាន់ Magnetic Smart Phone 📱  
-            099 | 098 969393 | 067 88888 1 | 085 88888 1
+        <div class="flex-1 min-w-0">
+          <h2 class="font-bold text-base text-white">Messenger</h2>
+          <p class="khmer-font text-xs text-slate-400 mt-0.5">Chat មកកាន់ Magnetic Smart Phone 📱</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- 8. TikTok 1 -->
+      <a href="https://www.tiktok.com/@magnetic_apple_gojo" target="_blank" rel="noopener noreferrer" class="glass-card">
+        <div class="icon-wrapper bg-slate-900 border border-slate-700">
+          <img src="./onlineshop.png" 
+               alt="Magnetic GOJO" 
+               class="w-full h-full object-cover"
+               onerror="this.onerror=null; this.src='https://placehold.co/48x48/0f172a/ffffff?text=TT';">
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <h2 class="font-bold text-base text-white truncate">TikTok • Magnetic GOJO</h2>
+            <span class="px-2 py-0.5 text-[9px] font-bold rounded-full bg-slate-800 text-slate-200">ACC 1</span>
+          </div>
+          <p class="khmer-font text-xs text-slate-400 mt-0.5">គណនីផ្លូវការ TikTok ឈ្មោះ : Magnetic GOJO</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- 9. TikTok 2 -->
+      <a href="https://www.tiktok.com/@magneticgojo" target="_blank" rel="noopener noreferrer" class="glass-card">
+        <div class="icon-wrapper bg-slate-900 border border-slate-700">
+          <img src="./phoneshop.png" 
+               alt="magneticgojo" 
+               class="w-full h-full object-cover"
+               onerror="this.onerror=null; this.src='https://placehold.co/48x48/e11d48/ffffff?text=TT';">
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <h2 class="font-bold text-base text-white truncate">TikTok • magneticgojo</h2>
+            <span class="px-2 py-0.5 text-[9px] font-bold rounded-full bg-rose-500/20 text-rose-300">ACC 2</span>
+          </div>
+          <p class="khmer-font text-xs text-slate-400 mt-0.5">គណនីផ្លូវការ TikTok ឈ្មោះ : magneticgojo</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- 10. Google Maps -->
+      <a href="https://maps.app.goo.gl/6S4p5MoYTnf8b7kU7" target="_blank" rel="noopener noreferrer" class="glass-card">
+        <div class="icon-wrapper bg-gradient-to-br from-emerald-500 to-teal-700 text-white shadow-md">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h2 class="khmer-font font-bold text-base text-white">ទីតាំងហាង (Google Maps)</h2>
+          <p class="khmer-font text-xs text-slate-400 mt-0.5 leading-relaxed">
+            ម៉ាញ៉េទិច ផ្ទះ 731 ផ្លូវកម្ពុជាក្រោម ស្តុបទឹកល្អក់១
           </p>
         </div>
-      </div>
-    </a>
-
-    <!-- Footer Special Offer Banner -->
-    <div class="special-offer-container">
-      <a href="https://magneticsmartphone.store" target="_blank" rel="noopener noreferrer" class="special-offer-logo-link">
-        <img src="magneticcc.png" onerror="this.onerror=null; this.src='https://placehold.co/150x50/e74c3c/ffffff?text=Special+Price'" 
-             alt="ចុចទីនេះដើម្បីដឹងតម្លៃពិសេស Logo" class="w-full h-auto">
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-emerald-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
       </a>
-      <p class="offer-text">ចុចទីនេះដើម្បីដឹងតម្លៃពិសេស!</p>
-    </div>
 
-    <div class="flex justify-center mt-6">
-      <a href="https://magneticsmartphone.store" target="_blank" rel="noopener noreferrer"
-        class="info-button w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md">
-        <svg class="w-6 h-6 text-gray-500" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
-          </path>
-        </svg>
-      </a>
-    </div>
+    </section>
 
-  </div>
+    <!-- Footer -->
+    <footer class="text-center mt-9 pb-4">
+      <div class="w-16 h-1 mx-auto rounded-full bg-gradient-to-r from-indigo-500 via-pink-500 to-cyan-400 mb-3 opacity-60"></div>
+      <p class="text-xs font-semibold text-slate-400">
+        &copy; 2026 ម៉ាញ៉េទិច - MAGNETIC. All Rights Reserved.
+      </p>
+    </footer>
+
+  </main>
+
 </body>
 
 </html>
